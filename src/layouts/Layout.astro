@@ -1,0 +1,56 @@
+---
+import Footer from "../components/Footer.astro"
+import Header from "../components/Header.astro"
+
+interface P {
+  title: string
+}
+
+export interface Props extends P {
+  frontmatter?: P
+}
+
+const { title } = Astro.props?.frontmatter
+  ? Astro.props.frontmatter
+  : Astro.props
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Astro description" />
+    <meta name="viewport" content="width=device-width" />
+
+    <link rel="icon" href="/favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{title} | Noam Zaks</title>
+  </head>
+  <body>
+    <Header title={title} />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<style>
+  main {
+    padding: 1rem;
+    width: 60ch;
+    max-width: calc(100% - 2rem);
+    flex-grow: 1;
+    overflow: auto;
+  }
+</style>
